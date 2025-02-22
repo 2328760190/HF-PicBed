@@ -21,10 +21,10 @@
 ### 基础请求
 ```bash
 # 无鉴权上传
-curl -X POST -F "source=@image.jpg" https://chb2026-image.hf.space/upload
+curl -X POST -F "source=@image.jpg" https://chb2026-image.hf.space/api/1/upload
 
 # Base64上传示例
-curl -X POST -d "source_b64=data:image/png;base64,iVBOR..." https://chb2026-image.hf.space/upload
+curl -X POST -d "source_b64=data:image/png;base64,iVBOR..." https://chb2026-image.hf.space/api/1/upload
 ```
 
 ### 带鉴权请求
@@ -33,20 +33,20 @@ curl -X POST -d "source_b64=data:image/png;base64,iVBOR..." https://chb2026-imag
 curl -X POST \
   -H "X-API-Key: YOUR_KEY" \
   -F "source=@image.png" \
-  https://your-space.hf.space/upload
+  https://your-space.hf.space/api/1/upload
 
 # 参数鉴权方式
 curl -X POST \
   -d "key=YOUR_KEY" \
   -F "source=@image.jpg" \
-  https://your-space.hf.space/upload
+  https://your-space.hf.space/api/1/upload
 ```
 
 ## 📚 API文档
 
-### 请求端点
+### 请求端点(兼容PicGo API vision 1.1)
 ```
-POST /upload
+POST /api/1/upload
 ```
 
 ### 请求参数
@@ -99,6 +99,7 @@ HTTP 302 跳转到图片直链
    | HF_TOKEN | ✔️ | hf_xxxxxxxx |
    | MAX_SIZE | ❌ | 5（单位MB） |
    | API_KEY | ❌ | your_secret_key |
+4.上传仓库所有文件(readme.md除外)
 5. 部署完成后访问空间域名即可使用
 
 ## 🔧 环境配置
@@ -106,7 +107,8 @@ HTTP 302 跳转到图片直链
 # .env 示例(可在huggingface的space中的设置中添加，或创建.env文件)
 DATASET_ID = "your_username/your_dataset"
 HF_TOKEN = "hf_xxxxxxxxxxxxxxxx"
-API_KEY = "your_optional_password"  # 非必填
+#非必填
+API_KEY = "your_optional_password" 
 MAX_SIZE = 10  # MB
 ```
 
